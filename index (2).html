@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Selamat Ulang Tahun!</title>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;700&family=Nunito:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --langit:#CDEBFA; --biru:#1B3A8C; --matahari:#FFC93C; --koral:#FF6F7D; --putih:#FFFFFF;
+  --teks:#16264F;
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--langit);color:var(--teks);font-family:'Nunito',system-ui,sans-serif;font-size:1.0625rem;line-height:1.6;overflow-x:hidden}
+h1,h2{font-family:'Fredoka',system-ui,sans-serif;color:var(--biru);line-height:1.05;margin:0}
+
+/* Hero */
+.hero{min-height:100svh;display:grid;place-items:center;text-align:center;padding:2rem 1.25rem;position:relative}
+.usia{font-family:'Fredoka',sans-serif;font-weight:700;font-size:clamp(9rem,42vw,20rem);line-height:.8;color:var(--matahari);
+  text-shadow:0 .04em 0 var(--koral);margin:0}
+.lahir{font:700 clamp(1.05rem,4vw,1.4rem) 'Fredoka',sans-serif;color:var(--biru);margin:.9rem 0 0}
+.hero h1{font-size:clamp(1.6rem,6vw,3rem);margin:.6rem auto 0;max-width:22ch}
+.hero p.sapaan{max-width:46ch;margin:1.25rem auto 1.75rem}
+.tombol{font:700 1.1rem 'Fredoka',sans-serif;border:0;border-radius:999px;padding:.9rem 1.8rem;cursor:pointer;
+  background:var(--koral);color:#fff;box-shadow:0 5px 0 #C94858;transition:transform .12s,box-shadow .12s}
+.tombol:active{transform:translateY(4px);box-shadow:0 1px 0 #C94858}
+:focus-visible{outline:3px solid var(--matahari);outline-offset:3px}
+
+/* Tali foto */
+.galeri{padding:3rem 0 5rem}
+.galeri h2{text-align:center;font-size:clamp(1.8rem,6vw,2.6rem);margin-bottom:2.5rem;padding:0 1rem}
+.tali{display:flex;flex-wrap:wrap;justify-content:center;gap:2.5rem 1.5rem;padding:0 1rem;position:relative}
+.foto{background:var(--putih);padding:.6rem .6rem 1.6rem;border-radius:6px;box-shadow:0 6px 18px rgba(20,40,100,.22);
+  width:min(250px,78vw);border:0;cursor:pointer;transform:rotate(var(--r));position:relative;font:inherit;color:inherit;text-align:center}
+.foto::before{content:"";position:absolute;top:-14px;left:50%;width:18px;height:34px;margin-left:-9px;background:var(--matahari);border-radius:4px;box-shadow:0 2px 3px rgba(0,0,0,.25)}
+.foto:nth-child(1){--r:-4deg}.foto:nth-child(2){--r:3deg}.foto:nth-child(3){--r:-2deg}.foto:nth-child(4){--r:4deg}.foto:nth-child(5){--r:-3deg}.foto:nth-child(6){--r:2deg}
+.foto img{display:block;width:100%;aspect-ratio:3/4;object-fit:cover;border-radius:3px;background:#cfe3f7}
+.foto:hover{transform:rotate(0) scale(1.04);transition:transform .2s}
+
+/* Pesan */
+.pesan{max-width:34rem;margin:0 auto;padding:0 1.5rem 5rem;text-align:center}
+.pesan h2{font-size:clamp(1.8rem,6vw,2.4rem);margin-bottom:1rem}
+
+/* Lightbox */
+dialog{border:0;padding:0;background:transparent;max-width:92vw}
+dialog::backdrop{background:rgba(10,20,50,.8)}
+dialog img{max-width:92vw;max-height:80vh;border-radius:8px;display:block}
+dialog form{text-align:center;margin-top:.75rem}
+dialog button{font:700 1rem 'Fredoka',sans-serif;border:0;border-radius:999px;padding:.6rem 1.4rem;background:var(--matahari);color:#16264F;cursor:pointer}
+
+/* Kontrol musik */
+#musik{position:fixed;right:1rem;bottom:calc(1rem + env(safe-area-inset-bottom,0px));width:3.2rem;height:3.2rem;border-radius:50%;
+  border:0;background:var(--biru);color:var(--langit);font-size:1.4rem;cursor:pointer;box-shadow:0 4px 12px rgba(0,0,0,.3);display:none}
+#konfeti{position:fixed;inset:0;pointer-events:none;z-index:50}
+@media (prefers-reduced-motion:reduce){.foto{transition:none}}
+</style>
+</head>
+<body>
+
+<!-- ====== UBAH BAGIAN INI ====== -->
+<script>
+const DATA = {
+  nama: "Bella",
+  usia: 23,                     // usia yang dirayakan
+  lahir: "10 November 2003",    // tanggal lahir
+  judul: "Selamat Ulang Tahun yang ke-23, Putri Tercintaku, Bella",
+  sapaan: "Hari ini, tepat tanggal 10 November, rasa syukur yang luar biasa memenuhi hati Mama atas kehadiranmu di dunia. Melihatmu tumbuh menjadi sosok yang baik, kuat, dan penuh kasih adalah anugerah terindah dalam hidup Mama. Selamat ulang tahun yang ke-23, Bella! Semoga di usia yang baru ini, setiap langkahmu selalu dinaungi oleh keberkahan, kebahagiaan, dan kesehatan yang sempurna.",
+  judulAkhir: "Doa dan Harapan Terbaik untuk Masa Depanmu",
+  pesan: "Ingatlah selalu bahwa rumah ini dan pelukan Mama akan selalu menjadi tempat paling aman untukmu berpulang. Teruslah menjadi pribadi yang menginspirasi, pantang menyerah, dan selalu menyebarkan kebaikan di mana pun kamu berada. Doa terbaik Mama selalu menyertai setiap mimpi dan usahamu. Mama sangat bangga dan sangat menyayangimu, hari ini, esok, dan selamanya.",
+  lagu: "lagu.mp3",             // nama file lagu di folder yang sama
+  foto: [                       // 6 foto di folder yang sama
+    "foto1.jpg", "foto2.jpg", "foto3.jpg", "foto4.jpg", "foto5.jpg", "foto6.png"
+  ]
+};
+</script>
+<!-- ============================= -->
+
+<main>
+  <section class="hero">
+    <div>
+      <p class="usia" id="usia" aria-hidden="true"></p>
+      <p class="lahir" id="lahir"></p>
+      <h1 id="judul"></h1>
+      <p class="sapaan" id="sapaan"></p>
+      <button class="tombol" id="mulai">Mulai pesta</button>
+    </div>
+  </section>
+
+  <section class="galeri">
+    <h2>Kenangan kita</h2>
+    <div class="tali" id="tali"></div>
+  </section>
+
+  <section class="pesan">
+    <h2 id="judulAkhir"></h2>
+    <p id="pesan"></p>
+  </section>
+</main>
+
+<button id="musik" aria-label="Jeda atau putar musik">♪</button>
+<canvas id="konfeti"></canvas>
+<audio id="audio" loop preload="auto"></audio>
+
+<dialog id="besar">
+  <img id="besarImg" alt="">
+  <form method="dialog"><button>Tutup</button></form>
+</dialog>
+
+<script>
+const $ = id => document.getElementById(id);
+$('usia').textContent = DATA.usia;
+$('lahir').textContent = DATA.usia + ' tahun, lahir ' + DATA.lahir;
+$('judul').textContent = DATA.judul;
+$('judulAkhir').textContent = DATA.judulAkhir;
+$('sapaan').textContent = DATA.sapaan;
+$('pesan').textContent = DATA.pesan;
+document.title = DATA.judul;
+$('audio').src = DATA.lagu;
+
+// Foto
+DATA.foto.forEach((src, i) => {
+  const b = document.createElement('button');
+  b.className = 'foto';
+  b.setAttribute('aria-label', 'Perbesar foto ' + (i + 1));
+  b.innerHTML = '<img loading="lazy" alt="">';
+  const img = b.querySelector('img');
+  img.src = src;
+  img.onerror = () => { img.removeAttribute('src'); };
+  b.onclick = () => { $('besarImg').src = img.src; $('besar').showModal(); };
+  $('tali').appendChild(b);
+});
+$('besar').addEventListener('click', e => { if (e.target === $('besar')) $('besar').close(); });
+
+// Musik
+const audio = $('audio'), tbl = $('musik');
+function setIkon(){ tbl.textContent = audio.paused ? '▶' : '♪'; }
+tbl.onclick = () => { audio.paused ? audio.play() : audio.pause(); setIkon(); };
+
+// Konfeti
+const cv = $('konfeti'), cx = cv.getContext('2d');
+let bit = [], jalan = false;
+function ukuran(){ cv.width = innerWidth; cv.height = innerHeight; }
+addEventListener('resize', ukuran); ukuran();
+function ledak(n){
+  const warna = ['#FFC93C','#FF6F7D','#4FA3FF','#7ED957','#B57BFF'];
+  for (let i = 0; i < n; i++) bit.push({
+    x: Math.random()*cv.width, y: -10 - Math.random()*cv.height*.3,
+    vx: (Math.random()-.5)*3, vy: 2 + Math.random()*4,
+    s: 6 + Math.random()*6, r: Math.random()*6, vr: (Math.random()-.5)*.3,
+    c: warna[Math.floor(Math.random()*warna.length)]
+  });
+  if (!jalan){ jalan = true; requestAnimationFrame(gambar); }
+}
+function gambar(){
+  cx.clearRect(0,0,cv.width,cv.height);
+  bit = bit.filter(p => p.y < cv.height + 20);
+  bit.forEach(p => {
+    p.x += p.vx; p.y += p.vy; p.r += p.vr;
+    cx.save(); cx.translate(p.x,p.y); cx.rotate(p.r);
+    cx.fillStyle = p.c; cx.fillRect(-p.s/2,-p.s/4,p.s,p.s/2); cx.restore();
+  });
+  if (bit.length) requestAnimationFrame(gambar); else jalan = false;
+}
+
+// Tombol mulai
+$('mulai').onclick = () => {
+  audio.play().catch(()=>{}); setIkon();
+  tbl.style.display = 'block';
+  if (!matchMedia('(prefers-reduced-motion: reduce)').matches) { ledak(160); setTimeout(()=>ledak(100),900); }
+  $('tali').scrollIntoView({behavior:'smooth', block:'center'});
+};
+</script>
+</body>
+</html>
